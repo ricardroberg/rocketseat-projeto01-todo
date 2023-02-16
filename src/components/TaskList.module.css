@@ -1,0 +1,55 @@
+p {
+  margin: 0;
+}
+
+.taskListContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--gray-300);
+  width: 100%;
+}
+
+.emptyTasks, .notEmptyTasks {
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 24px;
+  width: 100%;
+}
+
+.clipboardIcon {
+  color: var(--gray-400);
+}
+
+.emptyTaskItem {
+  width: 100%;
+  background: var(--gray-600);
+  border: none;
+  border-radius: 8px;
+  height: 52px;
+
+  border-top: 1px solid var(--gray-400);
+}
+
+.taskItemList {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: var(--gray-600);
+  border: none;
+  border-radius: 8px;
+  height: 52px;
+
+  border: 1px solid var(--gray-400);
+  margin-bottom: 12px;
+}
+
+
+
+
+.text1 {
+  font-weight: bold;
+}

@@ -1,13 +1,17 @@
-import { CreateTodo } from "./components/CreateTodo";
-import { Header } from "./components/Header";
-import { Tasks } from "./components/Tasks";
+import { Todo } from "./components/Todo";
+
+import style from "./App.module.css";
+import Logo from "./assets/logo.svg";
 
 function App() {
   return (
     <div>
-      <Header />
-      <CreateTodo />
-      <Tasks />
+      <header className={style.header}>
+        <span>
+          <img src={Logo} alt="" className={style.logo} />
+        </span>
+      </header>
+      <Todo />
     </div>
   );
 }

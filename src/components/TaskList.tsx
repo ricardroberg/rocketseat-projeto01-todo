@@ -1,21 +1,45 @@
-import React, { useState } from "react";
-import { ClipboardText } from "phosphor-react";
+import { useState } from "react";
+import {
+  CheckCircle,
+  Circle,
+  CircleNotch,
+  ClipboardText,
+} from "phosphor-react";
 
-export default function TaskList() {
-  const [taskCount, setTaskCount] = useState(0);
-  const [completedTasks, setCompletedTasks] = useState(0);
-  const [tasks, setTasks] = useState([]);
+import style from "./TaskList.module.css";
 
+interface Tasks {
+  task: string;
+  isDone: boolean;
+}
+
+interface TaskListProps {
+  taskList: Tasks[];
+}
+
+export default function TaskList({ taskList }: TaskListProps) {
   return (
-    <div>
-      {tasks.length ? (
-        <div>Lista de Tarefas</div>
+    <div className={style.taskListContainer}>
+      {taskList.length ? (
+        <div className={style.notEmptyTasks}>
+          {taskList.map(({ task, isDone }) => {
+            return (
+              <div className={style.taskItemList}>
+                {isDone ? <CheckCircle /> : <Circle />}
+                <div key={task} className={style.taskItem}>
+                  {task}
+                </div>
+              </div>
+            );
+          })}
+        </div>
       ) : (
-        <div>
-          <span>
+        <div className={style.emptyTasks}>
+          <input type="text" className={style.emptyTaskItem} />
+          <span className={style.clipboardIcon}>
             <ClipboardText size={56} />
           </span>
-          <p>Você ainda não tem tarefas cadastradas</p>
+          <p className={style.text1}>Você ainda não tem tarefas cadastradas</p>
           <p>Crie tarefas e organize seus itens a fazer</p>
         </div>
       )}
