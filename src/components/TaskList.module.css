@@ -41,13 +41,24 @@ p {
   background: var(--gray-600);
   border: none;
   border-radius: 8px;
-  height: 52px;
+  height: 72px;
 
   border: 1px solid var(--gray-400);
   margin-bottom: 12px;
 }
 
+.taskItemList > svg {
+  color: var(--gray-600);
+}
 
+.taskItem {
+  padding: 16px 52px;
+}
+
+.isDone, .notDone {
+
+ cursor: pointer;
+}
 
 
 .text1 {

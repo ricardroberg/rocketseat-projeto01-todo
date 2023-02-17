@@ -4,6 +4,7 @@ import {
   Circle,
   CircleNotch,
   ClipboardText,
+  Trash,
 } from "phosphor-react";
 
 import style from "./TaskList.module.css";
@@ -25,10 +26,17 @@ export default function TaskList({ taskList }: TaskListProps) {
           {taskList.map(({ task, isDone }) => {
             return (
               <div className={style.taskItemList}>
-                {isDone ? <CheckCircle /> : <Circle />}
+                <span className={isDone ? style.isDone : style.notDone}>
+                  {isDone ? (
+                    <CheckCircle color="#5E60CE" cursor={2} weight="fill" />
+                  ) : (
+                    <Circle />
+                  )}
+                </span>
                 <div key={task} className={style.taskItem}>
                   {task}
                 </div>
+                <Trash color="#808080"/>
               </div>
             );
           })}

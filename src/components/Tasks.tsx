@@ -36,7 +36,10 @@ export function Tasks() {
           Tarefas criadas <span>{taskCount}</span>
         </div>
         <div className={style.tasksDone}>
-          Concluídas <span>{tasksCompleted}</span>
+          Concluídas{" "}
+          <span>
+            {tasksCompleted === 0 ? 0 : `${tasksCompleted} de ${taskCount}`}
+          </span>
         </div>
       </div>
       <TaskList taskList={tasks} />

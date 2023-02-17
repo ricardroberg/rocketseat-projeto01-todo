@@ -33,12 +33,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: nowrap;
+
+  padding: 0px 8px;
   height: 19px;
-  width: 19px;
+  min-width: 19px;
 
   color: var(--gray-200);
   background-color: var(--gray-400);
   font-size: 12px;
 
-  border-radius: 50%;
+  border-radius: 999px;
 }
