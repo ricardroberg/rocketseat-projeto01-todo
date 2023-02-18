@@ -10,22 +10,28 @@ interface TasksProps {
 
 export function Tasks() {
   const [taskCount, setTaskCount] = useState(0);
-  const [completedTasks, setCompletedTasks] = useState(0);
+  const [taskComplete, setTasksComplete] = useState(false);
   const [tasks, setTasks] = useState([
     {
       task: "Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.",
-      isDone: true,
+      isDone: taskComplete,
     },
-    { task: "Estudar React", isDone: false },
-    { task: "Fisioterapia", isDone: false },
-    { task: "Estudo Faculdade", isDone: false },
-    { task: "Projeto particular", isDone: true },
-    { task: "Estágio", isDone: false },
+    { task: "Estudar React", isDone: taskComplete },
+    { task: "Fisioterapia", isDone: taskComplete },
+    { task: "Estudo Faculdade", isDone: taskComplete },
+    { task: "Projeto particular", isDone: taskComplete },
+    { task: "Estágio", isDone: taskComplete },
   ]);
 
   useEffect(() => {
     setTaskCount(tasks.length);
   }, [tasks]);
+
+  function handleTaskCompleted(isDone: boolean) {
+    if (!isDone) {
+      isDone = true;
+    }
+  }
 
   const tasksCompleted = tasks.filter((task) => task.isDone).length;
 
@@ -42,7 +48,7 @@ export function Tasks() {
           </span>
         </div>
       </div>
-      <TaskList taskList={tasks} />
+      <TaskList taskList={tasks} handleTaskCompleted={handleTaskCompleted} />
     </div>
   );
 }

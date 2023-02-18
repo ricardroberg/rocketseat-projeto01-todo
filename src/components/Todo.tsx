@@ -3,8 +3,6 @@ import style from "./Todo.module.css";
 import { Tasks } from "./Tasks";
 
 export function Todo() {
-
-  
   return (
     <div className={style.container}>
       <form action="" className={style.formInput}>

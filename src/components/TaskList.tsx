@@ -1,11 +1,4 @@
-import { useState } from "react";
-import {
-  CheckCircle,
-  Circle,
-  CircleNotch,
-  ClipboardText,
-  Trash,
-} from "phosphor-react";
+import { Check, ClipboardText, Trash } from "phosphor-react";
 
 import style from "./TaskList.module.css";
 
@@ -16,27 +9,37 @@ interface Tasks {
 
 interface TaskListProps {
   taskList: Tasks[];
+  handleTaskCompleted: (task: any) => void;
 }
 
-export default function TaskList({ taskList }: TaskListProps) {
+export default function TaskList({
+  taskList,
+  handleTaskCompleted,
+}: TaskListProps) {
   return (
     <div className={style.taskListContainer}>
       {taskList.length ? (
         <div className={style.notEmptyTasks}>
           {taskList.map(({ task, isDone }) => {
             return (
-              <div className={style.taskItemList}>
-                <span className={isDone ? style.isDone : style.notDone}>
-                  {isDone ? (
-                    <CheckCircle color="#5E60CE" cursor={2} weight="fill" />
-                  ) : (
-                    <Circle />
-                  )}
-                </span>
+              <div
+                onClick={() => handleTaskCompleted(isDone)}
+                key={task}
+                className={style.taskItemList}
+              >
+                {isDone ? (
+                  <div className={style.isDone}>
+                    <Check />
+                  </div>
+                ) : (
+                  <div className={style.notDone} />
+                )}
                 <div key={task} className={style.taskItem}>
                   {task}
                 </div>
-                <Trash color="#808080"/>
+                <div className={style.trashIcon}>
+                  <Trash size={16} />
+                </div>
               </div>
             );
           })}
