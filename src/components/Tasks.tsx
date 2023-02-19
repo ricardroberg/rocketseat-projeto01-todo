@@ -1,54 +1,82 @@
 import { useEffect, useState } from "react";
-import TaskList from "./TaskList";
 
 import style from "./Tasks.module.css";
+import { Check, ClipboardText, Trash } from "phosphor-react";
 
 interface TasksProps {
   task: string;
   isDone: boolean;
+  onDeleteTask: (task: string) => void;
+  completedCount: (count: number) => void;
 }
+[];
 
-export function Tasks() {
-  const [taskCount, setTaskCount] = useState(0);
-  const [taskComplete, setTasksComplete] = useState(false);
-  const [tasks, setTasks] = useState([
-    {
-      task: "Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.",
-      isDone: taskComplete,
-    },
-    { task: "Estudar React", isDone: taskComplete },
-    { task: "Fisioterapia", isDone: taskComplete },
-    { task: "Estudo Faculdade", isDone: taskComplete },
-    { task: "Projeto particular", isDone: taskComplete },
-    { task: "Estágio", isDone: taskComplete },
-  ]);
+export function Tasks({
+  task,
+  isDone,
+  onDeleteTask,
+  completedCount,
+}: TasksProps) {
+  const [isTaskDone, setIsTaskDone] = useState(isDone);
+  const [taskCompletedCount, setTaskCompletedCount] = useState(0);
 
   useEffect(() => {
-    setTaskCount(tasks.length);
-  }, [tasks]);
-
-  function handleTaskCompleted(isDone: boolean) {
-    if (!isDone) {
-      isDone = true;
+    if (isTaskDone === true) {
+      setTaskCompletedCount(taskCompletedCount + 1);
+    } else if (isTaskDone === false && taskCompletedCount > 0) {
+      setTaskCompletedCount(taskCompletedCount - 1);
     }
+  }, [isTaskDone]);
+
+  completedCount(taskCompletedCount);
+
+  function handleDeleteTask() {
+    onDeleteTask(task);
   }
 
-  const tasksCompleted = tasks.filter((task) => task.isDone).length;
+  function onTaskComplete() {
+    setIsTaskDone(!isTaskDone);
+  }
 
   return (
-    <div className={style.tasksContainer}>
-      <div className={style.taskSummary}>
-        <div className={style.createdTasks}>
-          Tarefas criadas <span>{taskCount}</span>
+    <div className={style.taskListContainer}>
+      {task?.length ? (
+        <div className={style.notEmptyTasks}>
+          <div
+            key={task}
+            className={style.taskItemList}
+            onClick={onTaskComplete}
+          >
+            {isTaskDone ? (
+              <div className={style.isDone}>
+                <Check />
+              </div>
+            ) : (
+              <div className={style.notDone} />
+            )}
+            <div
+              key={task}
+              className={
+                isTaskDone ? style.taskItemCompleted : style.taskItemIncomplete
+              }
+            >
+              {task}
+            </div>
+            <div className={style.trashIcon} onClick={handleDeleteTask}>
+              <Trash size={16} />
+            </div>
+          </div>
         </div>
-        <div className={style.tasksDone}>
-          Concluídas{" "}
-          <span>
-            {tasksCompleted === 0 ? 0 : `${tasksCompleted} de ${taskCount}`}
+      ) : (
+        <div className={style.emptyTasks}>
+          <input type="text" className={style.emptyTaskItem} />
+          <span className={style.clipboardIcon}>
+            <ClipboardText size={56} />
           </span>
+          <p className={style.text1}>Você ainda não tem tarefas cadastradas</p>
+          <p>Crie tarefas e organize seus itens a fazer</p>
         </div>
-      </div>
-      <TaskList taskList={tasks} handleTaskCompleted={handleTaskCompleted} />
+      )}
     </div>
   );
 }
