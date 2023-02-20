@@ -38,7 +38,7 @@ p {
   display: flex;
   align-items: center;
   width: 100%;
-  background: var(--gray-600);
+  background: var(--gray-500);
   border: none;
   border-radius: 8px;
   min-height: 72px;

@@ -8,8 +8,6 @@ interface TasksProps {
   isDone: boolean;
 }
 
-let setCount = 0;
-
 export function Todo() {
   const [tasks, setTasks] = useState<TasksProps[]>([]);
   const [newTask, setNewTask] = useState("");

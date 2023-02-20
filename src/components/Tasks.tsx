@@ -15,20 +15,20 @@ export function Tasks({
   task,
   isDone,
   onDeleteTask,
-  completedCount,
+  // completedCount,
 }: TasksProps) {
   const [isTaskDone, setIsTaskDone] = useState(isDone);
-  const [taskCompletedCount, setTaskCompletedCount] = useState(0);
+  // const [taskCompletedCount, setTaskCompletedCount] = useState(0);
 
-  useEffect(() => {
-    if (isTaskDone === true) {
-      setTaskCompletedCount(taskCompletedCount + 1);
-    } else if (isTaskDone === false && taskCompletedCount > 0) {
-      setTaskCompletedCount(taskCompletedCount - 1);
-    }
-  }, [isTaskDone]);
+  // useEffect(() => {
+  //   if (isTaskDone === true) {
+  //     setTaskCompletedCount(taskCompletedCount + 1);
+  //   } else if (isTaskDone === false && taskCompletedCount > 0) {
+  //     setTaskCompletedCount(taskCompletedCount - 1);
+  //   }
+  // }, [isTaskDone]);
 
-  completedCount(taskCompletedCount);
+  // completedCount(taskCompletedCount);
 
   function handleDeleteTask() {
     onDeleteTask(task);
