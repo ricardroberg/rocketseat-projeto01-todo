@@ -16,12 +16,21 @@
 }
 
 * {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
 }
 
 body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   line-height: 140%;
-  font-family: 'Inter', sans-serif;
+
   background: var(--gray-600);
+  color: var(--gray-100);
+}
+
+button {
+  cursor: pointer;
 }

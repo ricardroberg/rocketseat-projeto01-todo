@@ -1,0 +1,79 @@
+.headerContainer {
+  background: var(--gray-700);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 12.5rem;
+  position: relative;
+}
+
+.formInput {
+  position: absolute;
+
+  width: 100%;
+  max-width: 46rem;
+  height: 3.375rem;
+
+  display: flex;
+  gap: 0.5rem;
+  padding: 0 1rem;
+
+  bottom: calc(-3.375rem / 2);
+}
+
+.inputTodo {
+  height: 100%;
+  width: 100%;
+  flex: 1;
+
+  outline: none;
+  border: 1px solid var(--gray-700);
+  background: var(--gray-500);
+  color: var(--gray-100);
+  border-radius: 0.5rem;
+
+  padding: 0 1rem;
+
+  font-size: 1rem;
+}
+
+.inputTodo:focus {
+  border: 1px solid var(--purple-dark);
+}
+
+.inputTodo::placeholder {
+  color: var(--gray-300);
+  font-size: 1rem;
+}
+
+.createTodoButton {
+  height: 100%;
+  /* min-width: 90px;
+  max-width: 90px; */
+
+  background: var(--blue-dark);
+  color: var(--gray-100);
+  border-radius: 0.5rem;
+  border: none;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  gap: 0.375rem;
+  padding: 0 1rem;
+
+  font-weight: bold;
+  font-size: 0.875rem;
+
+  transition: background-color 0.2s;
+}
+
+.createTodoButton:hover {
+  background: var(--blue);
+}
+
+.createTodoButton span {
+
+  font-size: 14px;
+}

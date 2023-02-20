@@ -1,17 +1,49 @@
-import { Todo } from "./components/Todo";
+import { useState } from "react";
+import uuid from "react-uuid";
 
-import style from "./App.module.css";
-import Logo from "./assets/logo.svg";
+import { Todo } from "./components/Todo";
+import Header from "./components/Header";
+
+export interface TasksProps {
+  id: string;
+  title: string;
+  isCompleted: boolean;
+}
 
 function App() {
+  const [tasks, setTasks] = useState<TasksProps[]>([
+    {
+      id: "42342-342-4234234-24",
+      title: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      isCompleted: false,
+    },
+    {
+      id: "42342-342-4234234-25",
+      title: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      isCompleted: true,
+    },
+  ]);
+
+  function handleAddTask(taskTitle: string) {
+    setTasks([
+      ...tasks,
+      {
+        id: uuid(),
+        title: taskTitle,
+        isCompleted: false,
+      },
+    ]);
+  }
+
+  function handleDeleteTaskById(taskId: string) {
+    const newTasks = tasks.filter((task) => task.id !== taskId);
+    setTasks(newTasks);
+  }
+
   return (
     <div>
-      <header className={style.header}>
-        <span>
-          <img src={Logo} alt="" className={style.logo} />
-        </span>
-      </header>
-      <Todo />
+      <Header onAddTask={handleAddTask} />
+      <Todo tasks={tasks} onDeleteTask={handleDeleteTaskById} />
     </div>
   );
 }

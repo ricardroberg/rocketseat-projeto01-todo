@@ -1,16 +1,81 @@
 p {
-  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.18rem;
+  color: var(--gray-100);
+  margin-right: auto;
 }
 
 .taskListContainer {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  color: var(--gray-300);
+  justify-content: space-between;
   width: 100%;
+
+  border-radius: 0.5rem;
+  border: 1px solid var(--gray-400);
+
+  gap: 0.75rem;
+  padding: 1rem;
+
+  color: var(--gray-300);
+  background: var(--gray-500);
 }
 
+.checkContainer {
+  width: 1.125rem;
+  height: 1.125rem;
+  background: none;
+  border: none;
+}
+
+.checkContainer div {
+  min-width: 1.125rem;
+  height: 1.125rem;
+  border: 2px solid var(--blue);
+  border-radius: 50%;
+}
+
+.checkContainer div:hover {
+  background: var(--blue-dark);
+  opacity: 0.8;
+  border: 2px solid var(--blue);
+}
+
+.trashIcon {
+  min-width: 1.5rem;
+  height: 1.5rem;
+
+  color: var(--gray-300);
+  background: var(--gray-500);
+  border: none;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: color 0.2s;
+}
+
+.trashIcon:hover {
+  color: var(--danger);
+  border-radius: 4px;
+  background: var(--gray-400);
+}
+
+.isCompleted {
+  cursor: pointer;
+  min-width: 1.125rem;
+  height: 1.125rem;
+
+  color: var(--gray-300);
+  text-decoration: line-through;
+}
+
+.isCompleted:hover {
+  color: white;
+}
+
+/* 
 .emptyTasks, .notEmptyTasks {
   flex-direction: column;
   display: flex;
@@ -34,19 +99,7 @@ p {
   border-top: 1px solid var(--gray-400);
 }
 
-.taskItemList {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  background: var(--gray-500);
-  border: none;
-  border-radius: 8px;
-  min-height: 72px;
-
-  border: 1px solid var(--gray-400);
-  margin-bottom: 12px;
-  justify-content: space-between;
-}
+.taskItemList {}
 
 .taskItemList>svg {
   color: var(--gray-600);
@@ -65,7 +118,7 @@ p {
 
 
 
-.isDone, .notDone {
+.isCompleted, .notDone {
   margin-left: 20px;
   margin-right: 15px;
   cursor: pointer;
@@ -76,14 +129,14 @@ p {
 }
 
 
-.isDone {
+.isCompleted {
   border: 2px solid var(--purple-dark);
   background: var(--purple-dark);
   color: var(--gray-100);
   text-decoration: line-through;
 }
 
-.isDone:hover {
+.isCompleted:hover {
   background: var(--purple);
   border: 2px solid var(--purple);
 }
@@ -101,22 +154,4 @@ p {
 .text1 {
   font-weight: bold;
 }
-
-.trashIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 12px;
-  margin-right: 16px;
-  cursor: pointer;
-  min-width: 24px;
-  height: 24px;
-
-  transition: color 0.2s;
-}
-
-.trashIcon:hover {
-  color: var(--danger);
-  border-radius: 4px;
-  background: var(--gray-400);
-}
+*/

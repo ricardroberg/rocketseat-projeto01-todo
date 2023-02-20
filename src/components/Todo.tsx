@@ -1,91 +1,52 @@
-import { PlusCircle } from "phosphor-react";
-import style from "./Todo.module.css";
-import { Tasks } from "./Tasks";
+import { Task } from "./Task";
+import { TasksProps } from "../App";
 import { ChangeEvent, FormEvent, InvalidEvent, useState } from "react";
 
-interface TasksProps {
-  task: string;
-  isDone: boolean;
+import styles from "./Todo.module.css";
+import { ClipboardText } from "phosphor-react";
+
+interface TodoProps {
+  tasks: TasksProps[];
+  onDeleteTask: (taskId: string) => void;
 }
 
-export function Todo() {
-  const [tasks, setTasks] = useState<TasksProps[]>([]);
-  const [newTask, setNewTask] = useState("");
-
-  function onTaskCreate(event: FormEvent) {
-    event.preventDefault();
-
-    setTasks([...tasks, { task: newTask, isDone: false }]);
-    setNewTask("");
-  }
-
-  function handleNewCommentChange(event: ChangeEvent<HTMLInputElement>) {
-    event.target.setCustomValidity("");
-    setNewTask(event.target.value);
-  }
-
-  function handleNewTaskInvalid(event: InvalidEvent<HTMLInputElement>) {
-    event.target.setCustomValidity("Esse campo é obrigatório!");
-  }
-
-  function deleteTask(taskToDelete: string) {
-    const tasksWithoutDeletedOne = tasks.filter(({ task }) => {
-      return task !== taskToDelete;
-    });
-    setTasks(tasksWithoutDeletedOne);
-  }
-
-  // function getTaskCompletedCount(count: number){
-  //   return count
-  // }
-
-  const getTaskCompletedCount = (count: number) => {
-    return count;
-  }
+export function Todo({ tasks, onDeleteTask }: TodoProps) {
+  const tasksQuantity = tasks.length;
+  const tasksCompleted = tasks.filter((task) => task.isCompleted).length;
 
   return (
-    <div className={style.container}>
-      <form className={style.formInput} onSubmit={onTaskCreate}>
-        <input
-          name="task"
-          className={style.inputTodo}
-          type="text"
-          placeholder="Adicione uma nova tarefa"
-          value={newTask}
-          onChange={handleNewCommentChange}
-          onInvalid={handleNewTaskInvalid}
-          required
-        />
-        <button className={style.createTodoButton}>
-          <span>Criar</span>
-          <PlusCircle size={24} />
-        </button>
-      </form>
-      <div className={style.tasksContainer}>
-        <div className={style.taskSummary}>
-          <div className={style.createdTasks}>
-            Tarefas criadas <span>{tasks?.length}</span>
-          </div>
-          <div className={style.tasksDone}>
-            Concluídas{" "}
-            <span>
-              {tasks?.length === 0 ? 0 : `${getTaskCompletedCount} de ${tasks?.length}`}
-            </span>
-          </div>
+    <div className={styles.todoContainer}>
+      <header className={styles.todoHeader}>
+        <div>
+          <p>Tarefas criadas</p>
+          <span>{tasksQuantity}</span>
         </div>
-      </div>
+        <div>
+          <p className={styles.tasksCompleted}>Concluídas</p>
+          <span>
+            {tasksCompleted} de {tasksQuantity}
+          </span>
+        </div>
+      </header>
 
-      {tasks.map(({ task, isDone }) => {
-        return (
-          <Tasks
-            key={task}
-            task={task}
-            isDone={isDone}
-            onDeleteTask={deleteTask}
-            completedCount={getTaskCompletedCount}
-          />
-        );
-      })}
+      {tasks.length ? (
+        <div className={styles.tasksList}>
+          {tasks.map((task) => {
+            return (
+              <Task task={task} key={task.id} onDeleteTask={onDeleteTask} />
+            );
+          })}
+        </div>
+      ) : (
+        <div className={styles.emptyTasks}>
+          <input type="text" className={styles.emptyTaskItem} />
+          <span className={styles.clipboardIcon}>
+            <ClipboardText size={56} />
+          </span>
+          <span className={styles.text1}>Você ainda não tem tarefas cadastradas</span>
+          <span>Crie tarefas e organize seus itens a fazer</span>
+        </div>
+      )}
     </div>
   );
 }
