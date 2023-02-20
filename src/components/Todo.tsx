@@ -1,16 +1,17 @@
-import { Task } from "./Task";
+import { ClipboardText } from "phosphor-react";
+
 import { TasksProps } from "../App";
-import { ChangeEvent, FormEvent, InvalidEvent, useState } from "react";
+import { Task } from "./Task";
 
 import styles from "./Todo.module.css";
-import { ClipboardText } from "phosphor-react";
 
 interface TodoProps {
   tasks: TasksProps[];
   onDeleteTask: (taskId: string) => void;
+  toggleCompleted: (taskId: string) => void;
 }
 
-export function Todo({ tasks, onDeleteTask }: TodoProps) {
+export function Todo({ tasks, onDeleteTask, toggleCompleted }: TodoProps) {
   const tasksQuantity = tasks.length;
   const tasksCompleted = tasks.filter((task) => task.isCompleted).length;
 
@@ -33,7 +34,12 @@ export function Todo({ tasks, onDeleteTask }: TodoProps) {
         <div className={styles.tasksList}>
           {tasks.map((task) => {
             return (
-              <Task task={task} key={task.id} onDeleteTask={onDeleteTask} />
+              <Task
+                task={task}
+                key={task.id}
+                onDeleteTask={onDeleteTask}
+                toggleCompleted={toggleCompleted}
+              />
             );
           })}
         </div>
@@ -43,7 +49,9 @@ export function Todo({ tasks, onDeleteTask }: TodoProps) {
           <span className={styles.clipboardIcon}>
             <ClipboardText size={56} />
           </span>
-          <span className={styles.text1}>Você ainda não tem tarefas cadastradas</span>
+          <span className={styles.text1}>
+            Você ainda não tem tarefas cadastradas
+          </span>
           <span>Crie tarefas e organize seus itens a fazer</span>
         </div>
       )}

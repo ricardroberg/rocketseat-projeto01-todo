@@ -40,10 +40,26 @@ function App() {
     setTasks(newTasks);
   }
 
+  function toggleTaskCompletedById(taskId: string) {
+    const newTasks = tasks.map((task) => {
+      if (task.id === taskId) {
+        return {
+          ...task,
+          isCompleted: !task.isCompleted,
+        };
+      }
+      return task;
+    });
+    setTasks(newTasks);
+  }
+
   return (
     <div>
       <Header onAddTask={handleAddTask} />
-      <Todo tasks={tasks} onDeleteTask={handleDeleteTaskById} />
+      <Todo
+       tasks={tasks} 
+       onDeleteTask={handleDeleteTaskById} 
+       toggleCompleted={toggleTaskCompletedById}/>
     </div>
   );
 }

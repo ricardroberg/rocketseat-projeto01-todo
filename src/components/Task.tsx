@@ -1,4 +1,4 @@
-import { CheckCircle, Trash } from "phosphor-react";
+import { Check, Trash } from "phosphor-react";
 
 import { TasksProps } from "../App";
 
@@ -7,24 +7,28 @@ import styles from "./Task.module.css";
 interface TaskProps {
   task: TasksProps;
   onDeleteTask: (taskId: string) => void;
+  toggleCompleted: (taskId: string) => void;
 }
 
-export function Task({ task, onDeleteTask }: TaskProps) {
-  const isCompleted = true;
-
+export function Task({ task, onDeleteTask, toggleCompleted }: TaskProps) {
   return (
     <div className={styles.taskListContainer}>
-      {isCompleted ? (
-        <div className="isCompleted">
-          <CheckCircle size={22} color="#5059e2" weight="fill" />
-        </div>
-      ) : (
-        <button className={styles.checkContainer}>
-          <div />
-        </button>
-      )}
+      <button
+        className={styles.checkContainer}
+        onClick={() => toggleCompleted(task.id)}
+      >
+        {task.isCompleted ? (
+          <div className={styles.isCompleted}>
+            <Check size={14} color="#ffffff" weight="bold" />
+          </div>
+        ) : (
+          <div className={styles.notCompleted} />
+        )}
+      </button>
 
-      <p>{task.title}</p>
+      <p className={task.isCompleted ? styles.textCompleted : ""}>
+        {task.title}
+      </p>
       <button
         className={styles.trashIcon}
         onClick={() => onDeleteTask(task.id)}
